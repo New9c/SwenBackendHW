@@ -1,11 +1,16 @@
 from fastapi import FastAPI
 from pymongo import MongoClient
-
-dc_name = "ericgwhuang"
-uri = f"mongodb+srv://{dc_name}:{dc_name}@gdg-mongodb.chih-hao.xyz/{dc_name}?authMechanism=SCRAM-SHA-256&tls=true"
-tls_ca_file = "mongodb-bundle.pem"
+from config import config
+"""
+DC_NAME = "ericgwhuang"
+URI = f"mongodb+srv://{dc_name}:{dc_name}@gdg-mongodb.chih-hao.xyz/{dc_name}?authMechanism=SCRAM-SHA-256&tls=true"
+TLS_CA_FILE = "mongodb-bundle.pem"
 client = MongoClient(uri, tlsCAFile=tls_ca_file)
 db = client[dc_name]
+"""
+uri = config.URI
+client = MongoClient(uri)
+db = client["tricking_db"]
 users = db["users"]
 app = FastAPI()
 
